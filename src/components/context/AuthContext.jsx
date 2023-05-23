@@ -5,18 +5,22 @@ const AuthContext = createContext();
 
 export function AuthContextProvider({children}) {
   const [user, setUser] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
+ 
   useEffect(()=>{
       onUserStateChange((user)=> {
-          setUser(user)
-          console.log('user:::', user)
+        setIsLoading(false);
+        setUser(user)
+          
       })
   }, [])
 
-  return <AuthContext.Provider value= {{user, logIn, logOut}}>
+  return <AuthContext.Provider value= {{user, isLoading, logIn, logOut}}>
     {children}
   </AuthContext.Provider>
 }
+
 
 export function useAuthContext() {
   return useContext(AuthContext)
