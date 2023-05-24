@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "../components/ui/Button";
 import { uploadImage } from "../api/uploader";
+import { addNewProduct } from "../api/firebase";
 
 export default function NewProduct() {
     const [ product, setProduct ] = useState({});
@@ -8,7 +9,6 @@ export default function NewProduct() {
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
-        console.log('e.target:::', e.target)
         if(name === 'file') {
             setFile(files && files[0]);
             console.log("files[0]", files[0])
@@ -20,7 +20,8 @@ export default function NewProduct() {
         e.preventDefault();
         uploadImage(file)
         .then(url => {
-            console.log(url)
+            console.log(url);
+            addNewProduct(product, url)
         })
   
 

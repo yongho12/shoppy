@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app";
+// import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from 'uuid';
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "firebase/auth";
-import { getDatabase, ref, child, get } from "firebase/database";
+import { getDatabase, ref, get, set } from "firebase/database";
 
 
 const firebaseConfig = {
@@ -30,8 +32,6 @@ export function onUserStateChange(callback) {
     callback(updatedUser)
   });
 
-
-
 async function adminUser(user) {
   return get(ref(database, 'admins'))
     .then((snapshot) => {
@@ -45,6 +45,21 @@ async function adminUser(user) {
       return user;
   })
 }
-
 }
+
+
+export async function addNewProduct(product, image) {
+  const id = uuid();
+  return set(ref(database, `products/${id}`), {
+    ...product,
+    id,
+    price: parseInt(product.price),
+    image,
+    options: product.options.split(','),
+  });
+}
+
+
+
+
 
