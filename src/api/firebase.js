@@ -58,8 +58,3 @@ export async function addNewProduct(product, image) {
     options: product.options.split(','),
   });
 }
-
-
-
-
-
