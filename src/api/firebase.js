@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-// import { v4 as uuid } from 'uuid';
 import { v4 as uuid } from 'uuid';
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "firebase/auth";
 import { getDatabase, ref, get, set, remove } from "firebase/database";
@@ -69,7 +68,7 @@ export async function getProducts() {
 }
 
 export async function getCart(userId) {
-  return get(ref(database, `carts/%{userId}`)) //
+  return get(ref(database, `carts/${userId}`)) 
     .then((snapshot) => {
       const items = snapshot.val() || {};
       return Object.values(items)
