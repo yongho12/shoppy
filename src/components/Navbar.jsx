@@ -2,10 +2,11 @@ import React from "react";
 import { Link } from 'react-router-dom'
 import { FiShoppingBag } from 'react-icons/fi'
 import { BsFillPencilFill } from 'react-icons/bs'
-// import { logIn, logOut, onUserStateChange } from "../api/firebase";
+import { logIn, logOut, onUserStateChange } from "../api/firebase";
 import User from "./User";
 import Button from "./ui/Button";
 import { useAuthContext } from "../context/AuthContext";
+import CartStatus from "./ui/CartStatus";
 
 
 export default function Navbar() {
@@ -20,7 +21,8 @@ export default function Navbar() {
             </Link>
             <nav className="flex items-center gap-4 font-semibold">
                 <Link to='/products'>Products</Link>
-                <Link to='/carts'>Carts</Link>
+                {user && <Link to='/carts'><CartStatus />
+                </Link>}
                 {user && user.isAdmin && <Link to='/products/new' className="text-2xl">
                     <BsFillPencilFill />
                 </Link>}

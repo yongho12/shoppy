@@ -5,7 +5,7 @@ import { useAuthContext } from '../context/AuthContext'
 import { addOrUpdateToCart } from '../api/firebase'
 
 export default function Productdetail() {
-    const { uid} = useAuthContext();
+    const { uid } = useAuthContext();
     const {
         state: {
             product: {id, image, title, description, category, price, options },
