@@ -10,7 +10,7 @@ import CartStatus from "./ui/CartStatus";
 
 export default function Navbar() {
 
-    const { user, logIn, logOut} = useAuthContext()
+    const { user, logIn, anonymousLogIn, logOut} = useAuthContext()
    
     return (
         <header className='flex justify-between border-b border-gray-300 p-2'>
@@ -26,7 +26,9 @@ export default function Navbar() {
                     <BsFillPencilFill />
                 </Link>}
                 {user && <User user={user} />}
+                {/* <Button text={'Demo User'}/> */}
                 {!user && <Button onClick={logIn} text={'Login'} />}
+                {!user && <Button onClick={anonymousLogIn} text={'DemoUser'} />}
                 {user && <Button onClick={logOut} text={'Logout'} /> }
             </nav>
         </header>

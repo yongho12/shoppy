@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { v4 as uuid } from 'uuid';
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, signInWithPopup,signInAnonymously, GoogleAuthProvider, onAuthStateChanged, signOut } from "firebase/auth";
 import { getDatabase, ref, get, set, remove } from "firebase/database";
 
 
@@ -19,6 +19,10 @@ const database = getDatabase(app);
 
 export function logIn() {
   signInWithPopup(auth, provider).catch(console.error);
+}
+
+export function anonymousLogIn() {
+  signInAnonymously(auth).catch(console.error)
 }
 
 export function logOut() {
